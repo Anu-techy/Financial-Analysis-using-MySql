@@ -103,7 +103,7 @@ so we need to change the calender dates to fiscal year
 
                           select * from fact_sales_monthly where
                           customer_code=90002002 and 
-                          YEAR(DATE_ADD(date,INTERVAL 4 MONTH)) 
+                          YEAR(DATE_ADD(date,INTERVAL 4 MONTH)) = 2021
 
 Alternatively I created a funtion to get fiscal year
 
@@ -114,6 +114,40 @@ Alternatively I created a funtion to get fiscal year
                             SET fiscal_year = YEAR(DATE_ADD(calender_date,INTERVAL 4 MONTH));
                             RETURN fiscal_year;
                       END
+
+So I rewrite the above query using function:
+
+                      select * from fact_sales_monthly 
+                      where customer_code = 90002002 and
+                      get_fiscal_year(date) = 2021
+
+Now the ouput of the report contains product_code, sold_quantity of the customer_Code =  90002002 and fiscal_year = 2021
+
+For the variant and product name in the report, they are present in the product table,
+So, the fact_sales_monthly table needs to be joined with dim_product table with the column product_code
+
+                      select * from fact_sales_monthly s join dim_product p 
+                      on p.product_code=s.product_code
+                      where customer_code = 90002002 and
+                      get_fiscal_year(date) = 2021
+
+Now the ouput of the report contains product_code, product name, variant, sold_quantity 
+of the customer_Code =  90002002 and fiscal_year = 2021
+
+For gross price per item and gross price total in the report, they are present in the fact_gross_price table,
+So, the fact_sales_monthly table needs to be joined with dim_product table with the column product_code
+
+                      select s.date,s.product_code, p.product,p.variant,s.sold_quantity
+                      from fact_sales_monthly s join dim_product p 
+                      on p.product_code=s.product_code
+                      join fact_gross_price g
+                      on g.product_code=s.product_code and
+                      g.fiscal_year=get_fiscal_year(s.date)
+                      where customer_code = 90002002 and
+                      get_fiscal_year(date) = 2021
+
+
+
 
 
 
