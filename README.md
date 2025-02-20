@@ -74,7 +74,7 @@ Data is imported from Atliq Database
 
 =======================================================================
                         **Report1**
-=======================================================================
+
 Generate a Report of individual product sales from Croma India customer for FY - 2021
 so that individual product sales can be tracked and the report can be further used to do product
 analytics in excel.
