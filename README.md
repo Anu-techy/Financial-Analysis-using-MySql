@@ -72,9 +72,52 @@ Data is imported from Atliq Database
 5. fact_post_invoice_deductions (customer_code, product_code, date, discounts_pct, other_deductions_pct)
 6. fact_pre_invoice_deductions (customer_code, fiscal_year, pre_invoice_discount_pct)
 
+=======================================================================
+                        **Report1**
+=======================================================================
+Generate a Report of individual product sales from Croma India customer for FY - 2021
+so that individual product sales can be tracked and the report can be further used to do product
+analytics in excel.
 
-
+The report should include 
+1. month
+2. Product name
+3. variant
+4. sold quantity
+5. gross price per item
+6. gross price total
                                                 
+---------------------------------------------
+Get customer_code of croma 
+
+                    select * from dim_customer where customer like "%croma%" and market="india";
+                    from the output, customer_code of croma is 90002002
+----------------------------------------------------------
+Search for transactions with the customer_code  90002002 from fact_sales_monthly
+
+                      select * from fact_sales_monthly where customer_code=90002002;
+-------------------------------------------------------------------
+The report must contain data of FY-2021, but in the tables we have the calender dates.
+so we need to change the calender dates to fiscal year
+
+                          select * from fact_sales_monthly where
+                          customer_code=90002002 and 
+                          YEAR(DATE_ADD(date,INTERVAL 4 MONTH)) 
+
+Alternatively I created a funtion to get fiscal year
+
+                      CREATE FUNCTION 'get_fiscal_year' (calender_date DATE) returns INTEGER
+                      DETERMINISTIC
+                      BEGIN
+                            DECLARE fiscal_year INT;
+                            SET fiscal_year = YEAR(DATE_ADD(calender_date,INTERVAL 4 MONTH));
+                            RETURN fiscal_year;
+                      END
+
+
+
+
+
 
 
 
