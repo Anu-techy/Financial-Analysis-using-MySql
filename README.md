@@ -137,7 +137,8 @@ of the customer_Code =  90002002 and fiscal_year = 2021
 For gross price per item and gross price total in the report, they are present in the fact_gross_price table,
 So, the fact_sales_monthly table needs to be joined with dim_product table with the column product_code
 
-                      select s.date,s.product_code, p.product,p.variant,s.sold_quantity
+                      select s.date,s.product_code, p.product,p.variant,s.sold_quantity,g.gross_price,
+                      g.gross_price*s.sold_quantity as gross_price_total
                       from fact_sales_monthly s join dim_product p 
                       on p.product_code=s.product_code
                       join fact_gross_price g
@@ -146,7 +147,8 @@ So, the fact_sales_monthly table needs to be joined with dim_product table with 
                       where customer_code = 90002002 and
                       get_fiscal_year(date) = 2021
 
-
+We got the desired data of the report (3006 rows) through the above query
+Exported report as 'croma_2021_transacs' as csv file
 
 
 
