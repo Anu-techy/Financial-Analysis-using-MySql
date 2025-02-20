@@ -73,6 +73,7 @@ Data is imported from Atliq Database
 6. fact_pre_invoice_deductions (customer_code, fiscal_year, pre_invoice_discount_pct)
 
 =======================================================================
+
                         **Report1**
 
 Generate a Report of individual product sales from Croma India customer for FY - 2021
