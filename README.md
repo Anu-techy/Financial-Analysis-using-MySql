@@ -41,19 +41,16 @@ A **Pre invoice Deductions** refers to a reduction or discount applied to the pr
 
 **COGS** includes all the costs that are directly tied to the production process, such as the cost of raw materials, labor, and manufacturing expenses.
                                               
-                                              Cost of Goods Sold (COGS) = Manufacturing Cost + Freight (Transportation Cost) + Other Cost    
+                                Cost of Goods Sold (COGS) = Manufacturing Cost + Freight (Transportation Cost) + Other Cost    
 
-**Gross margin** is a financial metric that represents the difference between net sales and cost of goods sold (COGS). It shows how much money a company makes from its core business activities, excluding other expenses such as operating costs, taxes, and interest.
-
-                                              Gross Margin = Net Sales - COGS
-
-
-Gross margin is a key performance indicator for companies to assess their financial health and operational efficiency.
-It gives :
+**Gross margin** is a financial metric that represents the difference between net sales and cost of goods sold (COGS). It shows how much money a company makes from its core business activities, excluding other expenses such as operating costs, taxes, and interest. It is a key performance indicator for companies to assess their financial health and operational efficiency. It gives :
 
 **Profitability** Insight: A higher gross margin typically indicates a company is more efficient at producing goods or services at a lower cost, which can be a sign of strong management and competitive advantage.
 
 **Pricing Strategy:** It helps assess whether a company is pricing its products effectively to cover production costs and generate a reasonable profit.
+
+
+                                            Gross Margin = Net Sales - COGS
 
                                             Gross Margin % = ( GM / NS )*100
                                               
