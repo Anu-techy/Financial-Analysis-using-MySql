@@ -1,11 +1,12 @@
-# Financial-Analysis-using-MySql
+# Sales-Analysis-using-MySql
 
-**Aim** To Analyze sales of the company to unveal hidden insights and give actionable recommendations
+**Aim** 
 
 Analysing Sales of a Hardware company based on
 
 1. Monthly aggregated Sales Report of Croma in FY 2021 using joins and functions
 2. Yearly Sales Report of Croma using stored procedures
+3. Stored procedure to Determine Market Badge
 
 
 **Description:**
