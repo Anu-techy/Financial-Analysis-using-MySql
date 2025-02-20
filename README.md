@@ -4,9 +4,8 @@
 
 Analysing Sales of a Hardware company based on
 
-Customer Performance Report
-Market Performance Report
-KPI (Key Performance Indicators)
+1. Croma Sales Report of FY 2021
+
 
 **Description:**
 
@@ -73,105 +72,7 @@ Data is imported from Atliq Database
 6. fact_pre_invoice_deductions (customer_code, fiscal_year, pre_invoice_discount_pct)
 
 =======================================================================
-
-                        **Report1**
-
-Generate a Report of individual product sales from Croma India customer for FY - 2021
-so that individual product sales can be tracked and the report can be further used to do product
-analytics in excel.
-
-The report should include 
-1. month
-2. Product name
-3. variant
-4. sold quantity
-5. gross price per item
-6. gross price total
-                                                
----------------------------------------------
-Get customer_code of croma 
-
-                    select * from dim_customer where customer like "%croma%" and market="india";
-                    from the output, customer_code of croma is 90002002
-----------------------------------------------------------
-Search for transactions with the customer_code  90002002 from fact_sales_monthly
-
-                      select * from fact_sales_monthly where customer_code=90002002;
--------------------------------------------------------------------
-The report must contain data of FY-2021, but in the tables we have the calender dates.
-so we need to change the calender dates to fiscal year
-
-                          select * from fact_sales_monthly where
-                          customer_code=90002002 and 
-                          YEAR(DATE_ADD(date,INTERVAL 4 MONTH)) = 2021
-
-Alternatively I created a funtion to get fiscal year
-
-                      CREATE FUNCTION 'get_fiscal_year' (calender_date DATE) returns INTEGER
-                      DETERMINISTIC
-                      BEGIN
-                            DECLARE fiscal_year INT;
-                            SET fiscal_year = YEAR(DATE_ADD(calender_date,INTERVAL 4 MONTH));
-                            RETURN fiscal_year;
-                      END
-
-So I rewrite the above query using function:
-
-                      select * from fact_sales_monthly 
-                      where customer_code = 90002002 and
-                      get_fiscal_year(date) = 2021
-
-Now the ouput of the report contains product_code, sold_quantity of the customer_Code =  90002002 and fiscal_year = 2021
-
-For the variant and product name in the report, they are present in the product table,
-So, the fact_sales_monthly table needs to be joined with dim_product table with the column product_code
-
-                      select * from fact_sales_monthly s join dim_product p 
-                      on p.product_code=s.product_code
-                      where customer_code = 90002002 and
-                      get_fiscal_year(date) = 2021
-
-Now the ouput of the report contains product_code, product name, variant, sold_quantity 
-of the customer_Code =  90002002 and fiscal_year = 2021
-
-For gross price per item and gross price total in the report, they are present in the fact_gross_price table,
-So, the fact_sales_monthly table needs to be joined with dim_product table with the column product_code
-
-                      select s.date,s.product_code, p.product,p.variant,s.sold_quantity,g.gross_price,
-                      g.gross_price*s.sold_quantity as gross_price_total
-                      from fact_sales_monthly s join dim_product p 
-                      on p.product_code=s.product_code
-                      join fact_gross_price g
-                      on g.product_code=s.product_code and
-                      g.fiscal_year=get_fiscal_year(s.date)
-                      where customer_code = 90002002 and
-                      get_fiscal_year(date) = 2021
-
-We got the desired data of the report (3006 rows) through the above query
-Exported report as 'croma_2021_transacs' as csv file
-
-
-
-
-
-
-
-
-
-
-**Data Modelling**
-
-dim_custommer(customer_code) ---> fact_sales_monthly(customer_code) one to many
-
-dim_product(product_code) ---> fact_sales_monthly(product_code) one to many
-
-We cannot connect dim_market directly to fact_sales_monthly as there is no common column between dim_market and fact_sales_monthly table. Hence we connect dim_market to dim_customer
-
-dim_market(market) ---> dim_customer(market) one to many
-
-dim_date(date) ---> fact_sales_monthy(date) one to many
-
-
+                     
 
 **Recommendations**
 
