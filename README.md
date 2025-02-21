@@ -80,8 +80,12 @@ Data is imported from Atliq Database
 
 Use Report to
 
-Understand customers and market performance over the time
+1. Understand monthly sales of customers and identify last sales months and strategize to improve sales  
 
-Slice and dice data to drill down the hidden insights
+2. Understand yearly sales of customers to get Year over year change percentage and plan accordingly
 
-Determine discounts, helps to negotiate with consumers, and identify potential business expansion opportunities in promising countries.
+3. Quickly get the market performance by determining market badge
+
+4. Slice and dice data to drill down the hidden insights
+
+
