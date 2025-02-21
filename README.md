@@ -1,8 +1,8 @@
-# Sales-Analysis-using-MySql
+# Trend Analysis using MySql
 
 **Aim** 
 
-Analysing Sales of a Hardware company based on
+Calculating revenue and analysing trends based on
 
 1. Monthly aggregated Sales Report of Croma in FY 2021 using joins and functions
 2. Yearly Sales Report of Croma using stored procedures
